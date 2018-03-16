@@ -1,0 +1,93 @@
+{% load static %}
+
+<!DOCTYPE html>
+<html lang="en">
+    <head>
+        <meta charset="UTF-8">
+        <title>Instagram</title>
+        <link href="{% static 'Instagram/bootstrap.css' %}" rel="stylesheet">
+        <link rel="icon" href="{% static 'Instagram/insta.png' %}">
+        <link rel="stylesheet" href="{% static 'Instagram/index.css' %}">
+    </head>
+    <body>
+
+        <nav class="navbar fixed-top navbar-light bg-light" id="navbar">
+            <a class="navbar-brand mb-0 h1" href="{% url 'index' %}">
+                Instagram
+            </a>
+
+            <form class="form-inline">
+                <input class="form-control mr-sm-2" type="search" placeholder="Search" aria-label="Search">
+            </form>
+
+            <form action="{% url 'upload_img' %}" method="post" enctype="multipart/form-data" class="form-inline">
+                {% csrf_token %}
+                <label class="file-upload">
+                    <span class="btn btn-outline-primary my-1 my-sm-0">Image upload</span>
+                    <input id="id_image" type="file" onchange="this.form.submit()" name="image" class="d-none">
+                </label>
+            </form>
+
+            <a href="//127.0.0.1:8000/{{ username }}">
+                <img src="{% static 'Instagram/profile.png' %}" id="profile" style="width: 40px;">
+            </a>
+
+            <form action="{% url 'logout' %}" method="post">
+                {% csrf_token %}
+                <input type="submit" value="Logout" class="btn btn-outline-primary my-1 my-sm-0" />
+            </form>
+        </nav>
+
+        {% for username, img, is_liked, amount_of_likes, comments in image %}
+
+            <div class = "img-form">
+
+                <p class="font-weight-bold h4 text-primary username" href="{{ username }}">
+                    {{ username }}
+                </p>
+
+                <img class="img" src="{% static img.path_to_img|safe %}">
+
+                <div class="like-form">
+                    {% if is_liked %}
+                        <img class="like" src="{% static 'Instagram/like.png' %}">
+                    {% else %}
+                        <img class="like" src="{% static 'Instagram/like_void.png' %}">
+                    {% endif %}
+                </div>
+
+                <div class="amount_of_likes-form">
+                    <a class="font-weight-bold amount_of_likes">
+                        {{ amount_of_likes }} likes
+                    </a>
+                </div>
+
+                <div class="comments-form">
+                    {% for k, v, is_his_comment in comments %}
+                        <div class="comments">
+                            <a class="font-weight-bold">{{ k }}</a>
+                            <a class="font-weight-normal text-secondary comment">{{ v }}</a>
+                        </div>
+                        <div class="delete_comment">
+                            {% if is_his_comment %}
+                                <a>&times</a>
+                            {% endif %}
+                        </div>
+                    {% endfor %}
+                </div>
+
+                {% csrf_token %}
+                <div class="comment-form">
+                    <input class="form-control comment_type_form" type="text" placeholder="Leave comment">
+                </div>
+
+            </div>
+
+        {% endfor %}
+
+
+    </body>
+    <script src="https://code.jquery.com/jquery-3.1.0.min.js"></script>
+    <script src="{% static 'Instagram/app.js' %}"></script>
+    {% block javascript %}{% endblock %}
+</html>

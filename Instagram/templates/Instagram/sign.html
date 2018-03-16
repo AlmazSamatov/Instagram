@@ -1,0 +1,94 @@
+{% load static %}
+
+<!DOCTYPE html>
+<html>
+    <head>
+        <meta charset="utf-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+        <meta name="description" content="">
+        <meta name="author" content="">
+        <link rel="icon" href="{% static 'Instagram/insta.png' %}">
+
+        <title>Log in to Instagram</title>
+
+        <!-- Bootstrap core CSS -->
+        <link href="{% static 'Instagram/bootstrap.css' %}" rel="stylesheet">
+
+        <!-- Custom styles for this template -->
+        <link href="{% static 'Instagram/signin.css' %}" rel="stylesheet">
+    </head>
+    <body>
+
+        <div class="container" id="login-form">
+
+          <form class="form-signin" method="post" action="{% url 'login' %}">
+              {% csrf_token %}
+                <h2 class="form-signin-heading">Please log in</h2>
+                <div class="form-group">
+                  <label for="inputUsername" class="sr-only">Username</label>
+                    {{ form1.username1 }}
+                </div>
+              <div class="form-group">
+                <label for="inputPassword" class="sr-only">Password</label>
+                {{ form1.password }}
+              </div>
+            <button class="btn btn-lg btn-primary btn-block" type="submit" id="login">Log in</button>
+
+              <div id="msg_login">
+                <p class="font-weight-bold text-center text-danger">
+                    {{ message1 }}
+                </p>
+            </div>
+
+            <div class="form">
+                    <p class="text-center font-weight-light">
+                        Dont have an account?
+                        <a id="register_btn" href="">Register</a>
+                    </p>
+            </div>
+
+          </form>
+
+        </div> <!-- /container -->
+
+        <div class="d-none container" id="register-form">
+
+          <form class="form-signin" method="post" action="{% url 'register' %}">
+              {% csrf_token %}
+            <h2 class="form-signin-heading">Please register</h2>
+            <div class="form-group">
+              <label for="inputUsername" class="sr-only">Username</label>
+                {{ form2.username2 }}
+            </div>
+              <div class="form-group">
+                <label for="inputPassword" class="sr-only">Password</label>
+                {{ form2.password_1 }}
+              </div>
+              <div class="form-group">
+                <label for="inputPassword" class="sr-only">Repeat password</label>
+                {{ form2.password_2 }}
+              </div>
+            <button class="btn btn-lg btn-primary btn-block" type="submit" id="register">Register</button>
+
+              <div class="d-none" id="msg_reg">
+                <p class="font-weight-bold text-center text-danger">
+                    {{ message2 }}
+                </p>
+            </div>
+
+            <div>
+                <p class="text-center font-weight-light">
+                    Have an account?
+                    <a id="login_btn" href="">Log in</a>
+                </p>
+            </div>
+
+          </form>
+
+        </div> <!-- /container -->
+
+
+    </body>
+    <script src="https://code.jquery.com/jquery-3.1.0.min.js"></script>
+    <script src="{% static 'Instagram/registration.js' %}"></script>
+</html>

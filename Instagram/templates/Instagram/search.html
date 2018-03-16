@@ -1,0 +1,76 @@
+{% load static %}
+
+<!DOCTYPE html>
+<html lang="en">
+    <head>
+        <meta charset="UTF-8">
+        <title>Instagram</title>
+        <link href="{% static 'Instagram/bootstrap.css' %}" rel="stylesheet">
+        <link rel="icon" href="{% static 'Instagram/insta.png' %}">
+        <link rel="stylesheet" href="{% static 'Instagram/search.css' %}">
+    </head>
+    <body>
+
+        <nav class="navbar fixed-top navbar-light bg-light" id="navbar">
+            <a class="navbar-brand mb-0 h1" href="{% url 'index' %}">
+                Instagram
+            </a>
+
+            <form class="form-inline">
+                <input class="form-control mr-sm-2" type="search" placeholder="Search" aria-label="Search">
+            </form>
+
+            <form action="{% url 'upload_img' %}" method="post" enctype="multipart/form-data" class="form-inline">
+                {% csrf_token %}
+                <label class="file-upload">
+                    <span class="btn btn-outline-primary my-1 my-sm-0">Image upload</span>
+                    <input id="id_image" type="file" onchange="this.form.submit()" name="image" class="d-none">
+                </label>
+            </form>
+
+            <a href="{{ username }}">
+                <img src="{% static 'Instagram/profile.png' %}" id="profile" style="width: 40px;">
+            </a>
+
+            <form action="{% url 'logout' %}" method="post">
+                {% csrf_token %}
+                <input type="submit" value="Logout" class="btn btn-outline-primary my-1 my-sm-0" />
+            </form>
+        </nav>
+
+        {% if is_nothing %}
+        <div>
+            <p class="text-center font-weight-bold msg">По вашему запросу ничего не найдено</p>
+        </div>
+        {% endif %}
+
+        <table class="table-bordered ">
+            {% for username, follow in results %}
+                <tr>
+                    <td>
+                    <div class="search_results text-center search_res">
+                        <a class="font-weight-bold" href="//127.0.0.1:8000/{{ username }}">
+                            {{ username }}
+                        </a>
+                        {% if follow %}
+                        <a>
+                            unfollow
+                        </a>
+                        {% else %}
+                        <a>
+                            follow
+                        </a>
+                        {% endif %}
+                    </div>
+                    </td>
+                </tr>
+
+            {% endfor %}
+        </table>
+        </div>
+
+    </body>
+    <script src="https://code.jquery.com/jquery-3.1.0.min.js"></script>
+    <script src="{% static 'Instagram/app.js' %}"></script>
+    {% block javascript %}{% endblock %}
+</html>

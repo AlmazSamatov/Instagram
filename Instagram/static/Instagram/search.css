@@ -1,0 +1,21 @@
+#navbar{
+    margin-bottom: 90px;
+}
+@media (min-width: 500px) {
+  body {
+    padding-top: 70px;
+    padding-bottom: 42px;
+  }
+}
+.navbar{
+    max-height: 48px;
+}
+.username{
+    size: 30px;
+    margin-top: 10px;
+    margin-left: 20px;
+    margin-bottom: 10px;
+}
+.search_res{
+    font-size: 200%;
+}
