@@ -9,7 +9,7 @@ Instagram web-application using Django as backend and HTML/CSS/Bootsrtap/JQuery 
 ## Screenshots:
 
 <p align="center">
-  <img src="/screenshot_1.PNG" width="500"/>
-  <img src="/screenshot_2.PNG" width="500"/>
-  <img src="/screenshot_3.PNG" width="500"/>
+  <img src="/screenshot_1.PNG" width="800"/>
+  <img src="/screenshot_2.PNG" width="800"/>
+  <img src="/screenshot_3.PNG" width="800"/>
 </p>
