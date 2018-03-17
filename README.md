@@ -2,8 +2,10 @@
 Instagram web-application using Django as backend and HTML/CSS/Bootsrtap/JQuery as Frontend
 
 ## Application description:
-*  Ability to follow, like, leaving comment
+*  Ability to follow other user
 *  Ability to upload image
+*  Ability to like, leaving comment to image
+*  Ability to search user
 
  
 ## Screenshots:
