@@ -196,8 +196,9 @@ def my_page(request, username):
 
 
 @login_required
-def search(request, string):
-    results = User.objects.filter(username__contains=string)
+def search(request):
+    search_request = request.GET['request']
+    results = User.objects.filter(username__contains=search_request)
     followings = Follow.objects.filter(follower=request.user)
     follow = []
     for result in results:

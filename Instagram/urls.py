@@ -10,6 +10,6 @@ urlpatterns = [
     path('like/', views.like, name='like'),
     path('leave_comment/', views.leave_comment, name='leave_comment'),
     path('delete_comment/', views.delete_comment, name='delete_comment'),
-    path('search?<str:string>', views.search, name='search'),
+    path('search/', views.search, name='search'),
     path('<str:username>/', views.my_page, name='my_page'),
 ]
